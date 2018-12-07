@@ -1,5 +1,5 @@
 {
-  "name": "vue_blank",
+  "name": "vue-",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "zxfjd3g <258147149@qq.com>",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "cube-ui": "^1.12.6",
     "echarts": "^4.1.0",
     "mint-ui": "^2.2.13",
     "pubsub-js": "^1.6.0",
