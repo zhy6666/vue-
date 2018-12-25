@@ -6,6 +6,7 @@ const index = r => require.ensure([], () => r(require('@/xqPages/pages/achieveme
 const achievementMonth = r => require.ensure([], () => r(require('@/xqPages/pages/achievement/achievementMonth')), 'achievementMonth');
 const achievementToday = r => require.ensure([], () => r(require('@/xqPages/pages/achievement/achievementToday')), 'achievementToday');
 const personal = r => require.ensure([], () => r(require('@/xqPages/pages/Personal')), 'Personal');
+const test = r => require.ensure([], () => r(require('@/xqPages/pages/test')), 'test');
 
 export default [
   {
@@ -63,5 +64,12 @@ export default [
     meta:{
       showFooter:true
     }
-  }
+  },
+  {
+    path:'/test',
+    component:test,
+    meta:{
+      showFooter:true
+    }
+  },
 ]

@@ -23,7 +23,13 @@
           <span>最近刷新时间 12:22:33</span>
         </div>
       </div>
-      <div class="echarts" v-if="!showTodayLoan" id="echa"></div>
+      <div class="echart_ceng" v-if="!showTodayLoan">
+        <div class="ceng_top">
+          <p>今日出借(万元)</p>
+        </div>
+        <div class="echarts"  id="echa"></div>
+      </div>
+
     </div>
 
     <div class="look">
@@ -47,10 +53,17 @@
       return{
         showTodayLoan:false, //默认显示今日出借
           option:{
+            grid:{
+              top:30,
+              x:10,
+              x2:10,
+              y2:30
+            },
             xAxis: {
               type: 'category',
               boundaryGap: false,
               data: ['20', '21', '22', '23', '24', '25', '26'],
+
               axisTick: {
                 show: false, //是否显示坐标轴刻度
               },
@@ -65,6 +78,10 @@
               axisLine: {
                 show: false, //是否显示坐标轴轴线
               },
+              axisLabel:{
+                show:false,
+                formatter:'{value}'
+              }
             },
             series: [{
               data: [820, 932, 901, 934, 1290, 1330, 1320],
@@ -85,6 +102,9 @@
                 normal:{
                   color:"#89C3F4",
                   width:2,
+                  label : {
+                    show: true
+                  }
                 }
               }
             }]
@@ -95,7 +115,6 @@
         var myCharts = echarts.init(document.getElementById('echa'));
         myCharts.resize();
         myCharts.setOption(this.option);
-
     },
 
     methods:{
@@ -202,7 +221,7 @@
        font-family PingFangSC-Regular
        font-size 14px
        color #8D92A9
-    .echarts
+    .echart_ceng
       position absolute
       top 5px
       left 4%
@@ -212,6 +231,21 @@
       background-color #fff
       border-radius 8px
       box-shadow 0 4px 8px 2px rgba(137,174,240,0.15)
+      .ceng_top
+        width 100%
+        height 30px
+        padding-left 3%
+        padding-right 3%
+        background url("../../assets/images/disecopy@2x.png") no-repeat top
+        background-size 100% 30px
+        p
+         padding-top 14px
+
+
+      .echarts
+       margin-left 5%
+       margin-right 5%
+       height 165px
   .look
     display flex
     width 88%
