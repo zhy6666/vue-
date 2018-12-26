@@ -23,7 +23,7 @@
           <span>最近刷新时间 12:22:33</span>
         </div>
       </div>
-      <div class="echart_ceng" v-if="!showTodayLoan">
+      <div class="echart_ceng" v-show="tagType" v-else="!showTodayLoan">
         <div class="ceng_top">
           <p>今日出借(万元)</p>
         </div>
@@ -51,87 +51,104 @@
   export default {
     data(){
       return{
-        showTodayLoan:false, //默认显示今日出借
-          option:{
-            grid:{
-              top:30,
-              x:10,
-              x2:10,
-              y2:30
-            },
-            xAxis: {
-              type: 'category',
-              boundaryGap: false,
-              data: ['20', '21', '22', '23', '24', '25', '26'],
-
-              axisTick: {
-                show: false, //是否显示坐标轴刻度
-              },
-              axisLine: {
-                show: false, //是否显示坐标轴轴线
-              },
-            },
-            yAxis: {
-              axisTick: {
-                show: false, //是否显示坐标轴刻度
-              },
-              axisLine: {
-                show: false, //是否显示坐标轴轴线
-              },
-              axisLabel:{
-                show:false,
-                formatter:'{value}'
-              }
-            },
-            series: [{
-              data: [820, 932, 901, 934, 1290, 1330, 1320],
-              type: 'line',
-              symbolSize:4,
-              areaStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                      {offset: 0, color: '#ADDDFF'},
-                      {offset: 1, color: '#fff'}
-                    ]
-                  )
-                }
-              },
-              itemStyle:{
-                normal:{
-                  color:"#89C3F4",
-                  width:2,
-                  label : {
-                    show: true
-                  }
-                }
-              }
-            }]
-          }
+        showTodayLoan:true, //默认显示今日出借
+        myCharts:null
       }
     },
+    props:{
+      nearlySeven:Object,
+      tagType:Boolean
+    },
     mounted(){
-        var myCharts = echarts.init(document.getElementById('echa'));
-        myCharts.resize();
-        myCharts.setOption(this.option);
+
+      setTimeout(() => {
+        this.setEcharts();
+      }, 50);
+
     },
 
+
+   watch:{
+     nearlySeven:function () {
+          this.setEcharts()
+     }
+   },
     methods:{
       numToThousands(num){
         return num ? num.toString().replace(/(\d{1,3})(?=(\d{3})+$)/g,'$1,') : num;
       },
       fanzhuan(){
-        console.log("1111")
-         if(this.showTodayLoan){
-          console.log("222")
-           this.showTodayLoan=false
-         }else{
-           this.showTodayLoan=true
-         }
+        this.showTodayLoan=!this.showTodayLoan
+        if(!this.showTodayLoan){
+
+          setTimeout(() => {
+            this.setEcharts();
+          }, 50);
+        }
+      },
+      setEcharts(){
+        let option={
+          grid:{
+            top:30,
+            x:20,
+            x2:20,
+            y2:30
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['20', '21', '22', '23', '24', '25', '26'],
+
+            axisTick: {
+              show: false, //是否显示坐标轴刻度
+            },
+            axisLine: {
+              show: false, //是否显示坐标轴轴线
+            },
+          },
+          yAxis: {
+            axisTick: {
+              show: false, //是否显示坐标轴刻度
+            },
+            axisLine: {
+              show: false, //是否显示坐标轴轴线
+            },
+            axisLabel:{
+              show:false,
+              formatter:'{value}'
+            }
+          },
+          series: [{
+            data: [11820, 932, 901, 934, 1290, 1330, 132011],
+            type: 'line',
+            symbolSize:4,
+            areaStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                    {offset: 0, color: '#ADDDFF'},
+                    {offset: 1, color: '#fff'}
+                  ]
+                )
+              }
+            },
+            itemStyle:{
+              normal:{
+                color:"#89C3F4",
+                width:2,
+                label : {
+                  show: true
+                }
+              }
+            }
+          }]
+        }
+        var myCharts = echarts.init(document.getElementById('echa'));
+        myCharts.resize();
+        myCharts.setOption(option);
       }
     },
-
 
 
 
@@ -243,9 +260,10 @@
 
 
       .echarts
-       margin-left 5%
-       margin-right 5%
        height 165px
+       margin-left 4%
+       margin-right 4%
+
   .look
     display flex
     width 88%

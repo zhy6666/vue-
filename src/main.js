@@ -17,6 +17,11 @@ Vue.use(MintUi)
 Vue.component('my-swipe',Swipe)
 Vue.component('my-swipe-item',SwipeItem)
 
+//api
+import axios from 'axios'
+import ApiCantans from './net/ApiCantans.vue'
+axios.defaults.baseURL = ApiCantans.BASE_URL;
+Vue.prototype.$ajax = axios;
 //注册全局过滤器
 for (let key in filters){
   Vue.filter(key,filters[key])
