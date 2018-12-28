@@ -1,5 +1,5 @@
 <template>
-  <div class="today_wrap">
+  <div class="look_wrap">
     <div class="wrap" >
       <div class="top_content"></div>
       <div class="bottom_content"></div>
@@ -25,9 +25,9 @@
       </div>
       <div class="echart_ceng" v-show="tagType" v-else="!showTodayLoan">
         <div class="ceng_top">
-          <p>今日出借(万元)</p>
+          <p>{{boxTitle}}</p>
         </div>
-        <div class="echarts"  id="echa"></div>
+        <div id="main" class="echarts"  ></div>
       </div>
 
     </div>
@@ -52,7 +52,7 @@
     data(){
       return{
         showTodayLoan:true, //默认显示今日出借
-        myCharts:null
+        boxTitle:''
       }
     },
     props:{
@@ -60,10 +60,9 @@
       tagType:Boolean
     },
     mounted(){
-
       setTimeout(() => {
         this.setEcharts();
-      }, 50);
+      }, 100);
 
     },
 
@@ -87,6 +86,8 @@
         }
       },
       setEcharts(){
+        // console.log(this.nearlySeven)
+        // this.boxTitle=this.nearlySeven.series[0].name
         let option={
           grid:{
             top:30,
@@ -144,22 +145,17 @@
             }
           }]
         }
-        var myCharts = echarts.init(document.getElementById('echa'));
+        var myCharts = echarts.init(document.getElementById('main'));
         myCharts.resize();
         myCharts.setOption(option);
       }
     },
 
-
-
-
-
-
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-.today_wrap
+.look_wrap
   background-color #f6f8f9
   .wrap
     width 100%

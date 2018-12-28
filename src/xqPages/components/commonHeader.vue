@@ -1,5 +1,5 @@
 <template>
-  <div class="today_wrap">
+  <div class="tab_wrap">
     <div class="tab">
       <div class="tab_item" v-for="(item,index) in tabs" @click="go(index)"><span :class="activedId==item.id?'active':''">{{item.name}}</span></div>
     </div>
