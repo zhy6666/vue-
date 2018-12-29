@@ -57,6 +57,7 @@
   height 54px
   display flex
   align-items center
+  background-color #fff
   .footer_item
    flex 1
    text-align center

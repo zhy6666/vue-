@@ -1,20 +1,21 @@
 <template>
     <div class="item_wrap">
       <ul v-for="(item,index) in bottomList">
-        <li v-for="(item1,index1) in item">
-          <div class="cart"></div>
+        <li v-for="(item1,index1) in item.list">
+          <div :class="index1==0?'cart':''"></div>
           <div class="item_top" >
-            <span>申请转让金额</span>
+            <span>{{item1.name}}</span>
           </div>
           <div class="item_bottom">
             <div class="num_wrap">
-              <span class="number">1222222</span>
+              <span class="number">{{item1.value}}</span>
             </div>
             <div class="compare">
               <img src="../../assets/images/compare_up.png"/>
               <span>222</span>
             </div>
           </div>
+          <div :class="item.list.length-1==index1?'':'line'"></div>
         </li>
       </ul>
     </div>
@@ -24,7 +25,11 @@
   export default {
     props:{
       bottomList:Array
+    },
+    mounted(){
+      console.log(this.bottomList)
     }
+
   }
 </script>
 
@@ -88,15 +93,13 @@
           font-family: PingFangSC-Light;
           font-size: 16px;
           color: #FF6666;
-   li:after
-     content ''
-     display block
-     position absolute
-     right 0px
-     bottom 0px
-     width 100%
-     height 1px
-     border 1px dashed #e6e6e6
+     .line
+       position absolute
+       right 0px
+       bottom 0px
+       width 100%
+       height 1px
+       border 1px dashed #e6e6e6
    li:first-child
     border-top-left-radius 10px
     border-top-right-radius 10px
