@@ -59,17 +59,18 @@
       nearlySeven:Object,
       tagType:Boolean
     },
-    mounted(){
-      setTimeout(() => {
-        this.setEcharts();
-      }, 100);
+    // created(){
+    //   this.$nextTick(()=>{
+    //     this.setEcharts();
+    //   })
+    //
+    // },
 
-    },
 
 
    watch:{
      nearlySeven:function () {
-          this.setEcharts()
+         this.setEcharts();
      }
    },
     methods:{
@@ -157,6 +158,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .look_wrap
   background-color #f6f8f9
+  margin-top 80px
   .wrap
     width 100%
     height 200px

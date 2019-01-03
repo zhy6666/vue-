@@ -1,8 +1,14 @@
 <template>
   <div class="today_wrap">
     <common-header :activedId="0"></common-header>
-    <look-lend-money :nearlySeven="nearlySeven" :tagType="true"></look-lend-money>
-    <list-item :bottomList="bottomList"></list-item>
+    <mt-loadmore class="my_loadmore" :top-method="loadTop"  ref="loadmore">
+      <look-lend-money :nearlySeven="nearlySeven" :tagType="true"></look-lend-money>
+      <list-item :bottomList="bottomList"></list-item>
+      <div slot="top" class="mint-loadmore-top">
+        <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">↓</span>
+        <span v-show="topStatus === 'loading'">Loading...</span>
+      </div>
+    </mt-loadmore>
   </div>
 </template>
 
@@ -11,13 +17,15 @@
   import commonHeader from '../../../components/commonHeader'
   import LookLendMoney from "../../../components/lookLendMoney";
   import listItem from "../../../components/listItem";
-
   export default {
     data(){
       return{
         nearlySeven:{},
         bottomList:[],//首页下边list
       }
+    },
+    beforeCreate(){
+
     },
     created(){
       this.saveFooterCurrent(0)
@@ -222,12 +230,11 @@
               }
               // 请求成功
               if (res.data.code == 200) {
-              this.nearlySeven=res.data.data[1].datas[0]
-              this.bottomList=res.data.data[0].datas
+                this.nearlySeven=res.data.data[1].datas[0]
+                this.bottomList=res.data.data[0].datas
                 console.log(this.bottomList)
+                this.$refs.loadmore.onTopLoaded();
               }
-
-
 
             },)
           .catch(err => {
@@ -236,6 +243,11 @@
             console.log(err)
 
           })
+      },
+      loadTop() {
+        setTimeout(()=>{
+          this.battleList()
+        },500)
       }
     },
     components:{
@@ -247,5 +259,11 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-
+ .my_loadmore
+   margin-top 50px
+   height 50px
+  .mint-loadmore-top
+   height 50px
+   span
+    color #000000
 </style>

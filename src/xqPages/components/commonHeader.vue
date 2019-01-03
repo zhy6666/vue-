@@ -52,6 +52,9 @@
     background-repeat no-repeat
     align-items center
     justify-content center
+    position fixed
+    top 50px
+    z-index 100
     .tab_item
       float left
       margin-left 44px

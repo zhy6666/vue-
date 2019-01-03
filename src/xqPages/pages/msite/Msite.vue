@@ -25,6 +25,11 @@
     background-image url("../../../assets/images/zhanbaotitle.png")
     background-size 100% 100%
     background-repeat no-repeat
+    position fixed
+    left 0
+    right 0
+    top 0
+    z-index 100
     .main,.left,.right
      height 50px
      position relative

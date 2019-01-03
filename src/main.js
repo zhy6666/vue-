@@ -12,10 +12,11 @@ Vue.use(echarts)
 import 'echarts/lib/chart/bar'
 //引入mint-ui
 import MintUi from 'mint-ui'
-import {Swipe,SwipeItem} from 'mint-ui'
+import {Swipe,SwipeItem,Loadmore} from 'mint-ui'
 Vue.use(MintUi)
 Vue.component('my-swipe',Swipe)
 Vue.component('my-swipe-item',SwipeItem)
+Vue.component('mt_loadmore',Loadmore)
 
 //api
 import axios from 'axios'
