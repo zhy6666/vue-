@@ -1,12 +1,12 @@
 <template>
   <div class="today_wrap">
     <common-header :activedId="0"></common-header>
-    <mt-loadmore class="my_loadmore" :top-method="loadTop"  ref="loadmore">
+    <mt-loadmore class="my_loadmore" :top-method="loadTop" @top-status-change="handleTopChange"  ref="loadmore">
       <look-lend-money :nearlySeven="nearlySeven" :tagType="true"></look-lend-money>
       <list-item :bottomList="bottomList"></list-item>
       <div slot="top" class="mint-loadmore-top">
-        <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">↓</span>
-        <span v-show="topStatus === 'loading'">Loading...</span>
+        <span v-show="topStatus !== 'loading'" class="txt" :class="{ 'rotate': topStatus === 'drop' }">松开刷新</span>
+        <span v-show="topStatus === 'loading'" class="txt">正在刷新...</span>
       </div>
     </mt-loadmore>
   </div>
@@ -22,6 +22,7 @@
       return{
         nearlySeven:{},
         bottomList:[],//首页下边list
+        topStatus: '',
       }
     },
     beforeCreate(){
@@ -248,7 +249,10 @@
         setTimeout(()=>{
           this.battleList()
         },500)
-      }
+      },
+      handleTopChange(status) {
+        this.topStatus = status;
+      },
     },
     components:{
       LookLendMoney,
@@ -260,10 +264,13 @@
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
  .my_loadmore
-   margin-top 50px
-   height 50px
-  .mint-loadmore-top
-   height 50px
-   span
+   margin-top -16px
+   background-color #5b96ff
+   .mint-loadmore-top
+    height 50px
+    span
     color #000000
+    .txt
+      font-size 15px
+      color #000000
 </style>
