@@ -7,6 +7,7 @@ import Home from '../pages/Home'
 import Demo from '../pages/Demo'
 import Demo1 from '../pages/Demo1'
 import pageSwiper from '../pages/pageSwiper'
+import Login from '../pages/Login'
 import XQhome from '../xqPages/route'
 Vue.use(Router)
 export default new Router({
@@ -56,8 +57,12 @@ export default new Router({
       component:pageSwiper
     },
     {
+      path:'/login',
+      component:Login
+    },
+    {
       path:'/',
-      redirect:'/msite'
+      redirect:'/login'
     },
     ...XQhome
   ]

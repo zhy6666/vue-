@@ -1,8 +1,12 @@
 <template>
     <div class="item_wrap">
-      <ul v-for="(item,index) in bottomList">
-        <li v-for="(item1,index1) in item.list">
-          <div :class="index1==0?'cart':''"></div>
+      <ul>
+        <li v-for="(item1,index1) in bottomList.list">
+          <div v-if="index1==0&&cartIndex==0" class='cart' :style="{'background':'#e77296'}"></div>
+          <div v-if="index1==0&&cartIndex==1" class='cart' :style="{'background':'#ff0000'}"></div>
+          <div v-if="index1==0&&cartIndex==2" class='cart' :style="{'background':'#75d79b'}"></div>
+          <div v-if="index1==0&&cartIndex==3" class='cart' :style="{'background':'#9a98f2'}"></div>
+          <div v-if="index1==0&&cartIndex==4" class='cart' :style="{'background':'#f6c583'}"></div>
           <div class="item_top" >
             <span>{{item1.name}}</span>
           </div>
@@ -15,7 +19,7 @@
               <span>222</span>
             </div>
           </div>
-          <div :class="item.list.length-1==index1?'':'line'"></div>
+          <div :class="bottomList.list.length-1==index1?'':'line'"></div>
         </li>
       </ul>
     </div>
@@ -24,7 +28,13 @@
 <script>
   export default {
     props:{
-      bottomList:Array
+      bottomList:Array,
+      cartIndex:Number
+    },
+    data(){
+      return{
+        cartIndex:''
+      }
     },
     mounted(){
       console.log(this.bottomList)
@@ -39,7 +49,6 @@
   padding-top 10px
   padding-left 5%
   padding-right 5%
-  padding-bottom 54px
   ul
    width 100%
    margin-top 10px
@@ -54,7 +63,7 @@
       left 0
       height 40px
       width 4px
-      background-color #3c763d
+      border-top-left-radius 10px
      .item_top
       height 55px
       line-height 55px

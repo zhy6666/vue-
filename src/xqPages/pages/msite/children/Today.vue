@@ -2,11 +2,15 @@
   <div class="today_wrap">
     <common-header :activedId="0"></common-header>
     <mt-loadmore class="my_loadmore" :top-method="loadTop" @top-status-change="handleTopChange"  ref="loadmore">
-      <look-lend-money :nearlySeven="nearlySeven" :tagType="true"></look-lend-money>
-      <list-item :bottomList="bottomList"></list-item>
+      <div>
+        <look-lend-money :nearlySeven="nearlySeven" :tagType="true"></look-lend-money>
+        <list-item v-for="(item,index) in bottomList" :bottomList="item" :cartIndex="index"></list-item>
+      </div>
       <div slot="top" class="mint-loadmore-top">
-        <span v-show="topStatus !== 'loading'" class="txt" :class="{ 'rotate': topStatus === 'drop' }">松开刷新</span>
-        <span v-show="topStatus === 'loading'" class="txt">正在刷新...</span>
+        <div class="top_tip">
+          <span v-show="topStatus !== 'loading'" class="txt" :class="{ 'rotate': topStatus === 'drop' }">松开刷新</span>
+          <span v-show="topStatus === 'loading'" class="txt loading-txt">正在刷新...</span>
+        </div>
       </div>
     </mt-loadmore>
   </div>
@@ -17,12 +21,14 @@
   import commonHeader from '../../../components/commonHeader'
   import LookLendMoney from "../../../components/lookLendMoney";
   import listItem from "../../../components/listItem";
+  import  {Loadmore}from 'mint-ui'
   export default {
     data(){
       return{
         nearlySeven:{},
         bottomList:[],//首页下边list
         topStatus: '',
+        cartIndex:''
       }
     },
     beforeCreate(){
@@ -233,7 +239,6 @@
               if (res.data.code == 200) {
                 this.nearlySeven=res.data.data[1].datas[0]
                 this.bottomList=res.data.data[0].datas
-                console.log(this.bottomList)
                 this.$refs.loadmore.onTopLoaded();
               }
 
@@ -257,20 +262,27 @@
     components:{
       LookLendMoney,
       commonHeader,
-      listItem
+      listItem,
+      Loadmore
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
  .my_loadmore
-   margin-top -16px
-   background-color #5b96ff
+   /*background-color #5b96ff*/
+   background-color #3c763d
    .mint-loadmore-top
     height 50px
-    span
-    color #000000
-    .txt
-      font-size 15px
-      color #000000
+    .top_tip
+     width 100%
+     height 50px
+     position relative
+     .txt
+       font-size 15px
+       color #000000
+     .loading-txt
+      padding-left 36px
+
+
 </style>
