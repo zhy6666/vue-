@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "better-scroll": "^1.13.4",
     "cube-ui": "^1.12.6",
     "echarts": "^4.1.0",
     "mint-ui": "^2.2.13",
